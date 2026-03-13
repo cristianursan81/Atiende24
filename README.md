@@ -38,8 +38,8 @@ SQLite Database
         ▼
 RAG Engine
         │
-        ├── Embeddings
-        ├── Similarity Search
+        ├── Normalización/tokenización
+        ├── Scoring léxico por tokens
         │
         ▼
 OpenAI LLM
