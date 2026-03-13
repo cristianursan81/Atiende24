@@ -1,1 +1,1 @@
-import uvicornif __name__ == "__main__":    uvicorn.run(        "app.main:app",        host="0.0.0.0",        port=8000,        reload=True    )
+import uvicornfrom app.db.database import enginefrom app.db.models import Base# crear tablas si no existenBase.metadata.create_all(bind=engine)if __name__ == "__main__":    uvicorn.run(        "app.main:app",        host="0.0.0.0",        port=8000,        reload=True    )
