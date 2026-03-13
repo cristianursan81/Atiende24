@@ -1,0 +1,1 @@
+atiende24│├ backend├ frontend├ widget│└ docs├ 01-vision-producto.md├ 02-propuesta-valor.md├ 03-arquitectura-general.md├ 06-modelo-datos.md├ 07-diseno-api.md├ 18-plan-tecnico-mvp.md└ 23-plan-desarrollo-sprints.md
