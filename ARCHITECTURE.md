@@ -20,8 +20,8 @@ FastAPI Backend
    ▼
 RAG Engine
    │
-   ├── Embedding Generation
-   ├── Semantic Search
+   ├── Normalización/tokenización
+   ├── Scoring léxico por tokens
    │
    ▼
 OpenAI API
@@ -51,10 +51,10 @@ Sistema de recuperación de conocimiento.
 
 Pasos:
 
-1 generar embedding pregunta
-2 comparar con embeddings
-3 ordenar por similitud
-4 devolver top_k
+1 normalizar/tokenizar pregunta
+2 tokenizar knowledge items
+3 puntuar coincidencias
+4 ordenar por score y devolver top_k
 5 construir prompt
 
 ---
@@ -71,15 +71,11 @@ knowledge_items
 
 ---
 
-## Embeddings
+## Recuperación de conocimiento
 
-Modelo
+El MVP actual usa recuperación léxica basada en tokens y stopwords en español.
 
-text-embedding-3-small
-
-Cada knowledge item se convierte en vector semántico.
-
-Se almacenan serializados en JSON.
+No almacena embeddings ni vectores en base de datos.
 
 ---
 
@@ -108,7 +104,7 @@ API recibe mensaje
 se guarda mensaje
        │
        ▼
-generar embedding
+normalizar y tokenizar consulta
        │
        ▼
 buscar conocimiento relevante
