@@ -15,6 +15,7 @@ class Business(Base):
 
     knowledge_items = relationship("KnowledgeItem", back_populates="business", cascade="all, delete-orphan")
     conversations = relationship("Conversation", back_populates="business", cascade="all, delete-orphan")
+    settings = relationship("BusinessSettings", uselist=False)
 
 
 class Conversation(Base):
@@ -50,3 +51,20 @@ class KnowledgeItem(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     business = relationship("Business", back_populates="knowledge_items")
+class BusinessSettings(Base):
+    __tablename__ = "business_settings"
+
+    id = Column(Integer, primary_key=True, index=True)
+    business_id = Column(Integer, ForeignKey("businesses.id"), unique=True, nullable=False)
+
+    assistant_name = Column(String, nullable=False, default="Asistente virtual")
+    tone = Column(String, nullable=False, default="professional")
+    welcome_message = Column(Text, nullable=False, default="Hola, ¿en qué puedo ayudarte?")
+    fallback_message = Column(
+        Text,
+        nullable=False,
+        default="Lo siento, no dispongo de esa información en este momento."
+    )
+    system_prompt = Column(Text, nullable=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
