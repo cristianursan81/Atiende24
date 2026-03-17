@@ -1,8 +1,8 @@
 (function () {
-  const config = window.Atiende24Config;
+  const config = window.ChatGenieConfig || window.Atiende24Config;
 
   if (!config) {
-    console.error("Atiende24: falta configuración");
+    console.error("ChatGenie: falta configuración mágica");
     return;
   }
 
@@ -36,7 +36,7 @@
 
   const button = document.createElement("button");
   button.innerHTML = "💬";
-  button.title = "Abrir chat de soporte";
+  button.title = "Despertar a ChatGenie 🧞‍♂️";
   button.style.width = "60px";
   button.style.height = "60px";
   button.style.backgroundColor = isDarkMode ? "#1a1a1a" : "#007bff";
@@ -192,12 +192,12 @@
 
   const headerInfo = document.createElement("div");
   const headerTitle = document.createElement("div");
-  headerTitle.textContent = "Asistente Virtual";
+  headerTitle.textContent = "ChatGenie";
   headerTitle.style.fontSize = "16px";
   headerTitle.style.fontWeight = "600";
 
   const statusIndicator = document.createElement("div");
-  statusIndicator.innerHTML = "🟢 En línea";
+  statusIndicator.innerHTML = "✨ Listo para la magia";
   statusIndicator.style.fontSize = "12px";
   statusIndicator.style.opacity = "0.8";
 
@@ -239,7 +239,7 @@
   // Close button
   const closeButton = document.createElement("button");
   closeButton.innerHTML = "✕";
-  closeButton.title = "Cerrar chat";
+  closeButton.title = "Despedir a ChatGenie";
   closeButton.style.backgroundColor = "transparent";
   closeButton.style.border = "none";
   closeButton.style.color = "#fff";
@@ -440,8 +440,8 @@
       addMessage(msg.text, msg.role, false, msg.timestamp);
     });
   } else {
-    // Welcome message with personality
-    const welcomeText = "¡Hola! 👋 Soy tu asistente virtual inteligente. Estoy aquí para ayudarte las 24 horas del día.\n\n✨ Puedes escribir o usar comandos de voz\n🎯 Tengo acceso a información actualizada\n💡 ¿En qué puedo ayudarte hoy?";
+    // Welcome message with ChatGenie personality
+    const welcomeText = "🧞‍♂️ ¡Hola! Soy ChatGenie, tu asistente mágico personal.\n\n✨ Puedo ayudarte con cualquier deseo\n🎤 Habla conmigo o escribe tu mensaje\n🌟 Tengo poderes de IA para resolver tus dudas\n\n¿Cuál es tu primer deseo hoy? 🌟";
     addMessage(welcomeText, "assistant", false, new Date());
   }
 
@@ -666,7 +666,7 @@
     } catch (error) {
       hideLoadingIndicator();
       console.error("Error sending message:", error);
-      const errorMsg = "❌ Lo siento, ha ocurrido un error de conexión. Por favor, verifica tu conexión e inténtalo de nuevo.";
+      const errorMsg = "🔮 ¡Ups! ChatGenie está teniendo problemas mágicos. Verifica tu conexión e inténtalo de nuevo.";
       addMessage(errorMsg, "assistant");
     } finally {
       isLoading = false;
@@ -843,10 +843,10 @@
   // Initialize with theme
   applyTheme();
 
-  console.log("🎯 Atiende24 Advanced Chat Widget loaded successfully!");
-  console.log("⌨️ Keyboard shortcuts:");
-  console.log("  - Ctrl+Shift+C: Toggle chat");
-  console.log("  - Escape: Close chat");
-  console.log("  - Enter: Send message");
-  console.log("  - Shift+Enter: New line");
+  console.log("🧞‍♂️ ChatGenie Advanced Widget loaded successfully!");
+  console.log("⌨️ Magical shortcuts:");
+  console.log("  - Ctrl+Shift+C: Summon/dismiss ChatGenie");
+  console.log("  - Escape: Dismiss ChatGenie");
+  console.log("  - Enter: Make a wish (send message)");
+  console.log("  - Shift+Enter: Add more details to your wish");
 })();

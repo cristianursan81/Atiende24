@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>Atiende24 Advanced Widget Demo</title>
+  <title>ChatGenie Pro - Demo Mágico</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -280,19 +280,19 @@
 
 <div class="container">
   <div class="header">
-    <h1>🚀 Atiende24 Advanced Widget</h1>
-    <div class="subtitle">Chat inteligente con IA • Funciones avanzadas • Diseño moderno</div>
-    <span class="version-badge">v2.0 - Next Generation</span>
+    <h1>🧞‍♂️ ChatGenie Pro</h1>
+    <div class="subtitle">Tu asistente mágico • Conversaciones inteligentes • Diseño futurista</div>
+    <span class="version-badge">v2.0 - AI Magic Edition</span>
   </div>
   
   <div class="status-indicator">
     <div class="pulse"></div>
-    <strong>Estado del sistema:</strong> Backend conectado y funcionando correctamente
+    <strong>ChatGenie Status:</strong> Sistema activo y listo para conceder tus deseos 🧞‍♂️
   </div>
 
   <div class="action-buttons">
     <button class="btn" onclick="toggleChat()">
-      💬 Abrir Chat Demo
+      🧞‍♂️ Despertar a ChatGenie
     </button>
     <button class="btn btn-secondary" onclick="clearHistory()">
       🗑️ Limpiar Historial
@@ -385,8 +385,8 @@
           <code>http://localhost:8000</code>
         </div>
         <div class="config-item">
-          <span class="config-label">Modelo IA:</span>
-          <code>GPT-4o-mini</code>
+          <span class="config-label">Cerebro IA:</span>
+          <code>GPT-4o-mini Genie Brain</code>
         </div>
       </div>
       
@@ -418,14 +418,14 @@
   </div>
 
   <div class="footer">
-    <p>Desarrollado con ❤️ por <a href="#" onclick="sendTestMessage()">Atiende24</a></p>
-    <p>Tu asistente virtual inteligente disponible 24/7</p>
+    <p>Desarrollado con ✨ magia por <a href="#" onclick="sendTestMessage()">ChatGenie Team</a></p>
+    <p>Tu genio personal que hace realidad tus conversaciones 🧞‍♂️</p>
   </div>
 </div>
 
 <script>
-  // Configuración avanzada del widget
-  window.Atiende24Config = {
+  // Configuración mágica de ChatGenie 🧞‍♂️
+  window.ChatGenieConfig = window.Atiende24Config = {
     businessId: 1,
     apiKey: "c0a6a44d453916f597a03a1242312895ea4989c3bef10d87",  // API Key válida para demo
     apiBaseUrl: "http://localhost:8000",
@@ -452,7 +452,7 @@
       if (button) {
         button.click();
       } else {
-        alert('El widget se está cargando... ¡Inténtalo en unos segundos!');
+        alert('ChatGenie se está despertando... ¡Inténtalo en unos segundos! 🧞‍♂️');
       }
     }, 100);
   }
@@ -496,7 +496,7 @@
     setTimeout(() => {
       const input = document.querySelector('textarea[placeholder="Escribe tu mensaje..."]');
       if (input) {
-        input.value = '¡Hola! Este es un mensaje de prueba desde la demo 🚀';
+        input.value = '🧞‍♂️ ¡Hola ChatGenie! Este es mi primer deseo de prueba ✨';
         const event = new Event('input');
         input.dispatchEvent(event);
         
@@ -510,8 +510,8 @@
   }
   
   // Mostrar información del sistema
-  console.log('🎯 Atiende24 Demo Page loaded!');
-  console.log('📊 Features enabled:', {
+  console.log('🧞‍♂️ ChatGenie Demo Page loaded!');
+  console.log('✨ Magical features enabled:', {
     darkMode: true,
     voiceRecognition: 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window,
     speechSynthesis: 'speechSynthesis' in window,
@@ -528,7 +528,7 @@
     if ('Notification' in window) features.push('🔔 Notificaciones');
     
     if (features.length > 0) {
-      console.log('✅ Características soportadas:', features.join(', '));
+      console.log('🎭 Poderes mágicos soportados:', features.join(', '));
     }
   });
 </script>
