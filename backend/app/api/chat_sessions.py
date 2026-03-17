@@ -72,7 +72,7 @@ async def create_session(
 @router.get("/business/{business_id}", response_model=List[ChatSessionResponse])
 async def get_business_sessions(
     business_id: int,
-    status: Optional[str] = Query(None, regex="^(active|completed|abandoned)$"),
+    status: Optional[str] = Query(None, pattern="^(active|completed|abandoned)$"),
     channel: Optional[str] = None,
     user_email: Optional[str] = None,
     has_lead: Optional[bool] = None,
@@ -214,7 +214,7 @@ async def add_message_to_session(
 @router.get("/{session_id}/messages")
 async def get_session_messages(
     session_id: str,
-    message_type: Optional[str] = Query(None, regex="^(user|bot|system)$"),
+    message_type: Optional[str] = Query(None, pattern="^(user|bot|system)$"),
     skip: int = 0,
     limit: int = Query(default=50, le=200),
     db: Session = Depends(get_db)
@@ -332,7 +332,7 @@ async def get_session_analytics(session_id: str, db: Session = Depends(get_db)):
 @router.get("/business/{business_id}/analytics")
 async def get_session_analytics_summary(
     business_id: int,
-    period: str = Query(default="week", regex="^(day|week|month|quarter)$"),
+    period: str = Query(default="week", pattern="^(day|week|month|quarter)$"),
     db: Session = Depends(get_db)
 ):
     """Get session analytics summary for a business"""

@@ -74,8 +74,8 @@ async def create_lead(
 @router.get("/", response_model=List[LeadResponse])
 async def get_leads(
     business_id: int,
-    status: Optional[str] = Query(None, regex="^(new|contacted|qualified|converted|closed)$"),
-    lead_type: Optional[str] = Query(None, regex="^(inquiry|quote|demo|support)$"),
+    status: Optional[str] = Query(None, pattern="^(new|contacted|qualified|converted|closed)$"),
+    lead_type: Optional[str] = Query(None, pattern="^(inquiry|quote|demo|support)$"),
     lead_source: Optional[str] = None,
     min_score: Optional[int] = Query(None, ge=0, le=100),
     max_score: Optional[int] = Query(None, ge=0, le=100),
@@ -166,7 +166,7 @@ async def delete_lead(lead_id: int, db: Session = Depends(get_db)):
 @router.get("/business/{business_id}/analytics")
 async def get_lead_analytics(
     business_id: int,
-    period: str = Query(default="week", regex="^(day|week|month|quarter|year)$"),
+    period: str = Query(default="week", pattern="^(day|week|month|quarter|year)$"),
     db: Session = Depends(get_db)
 ):
     """Get lead analytics for a business"""

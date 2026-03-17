@@ -54,8 +54,8 @@ async def get_business_catalog(
     in_stock_only: bool = False,
     featured_only: bool = False,
     active_only: bool = True,
-    sort_by: str = Query(default="name", regex="^(name|price|created_at|stock_quantity)$"),
-    sort_order: str = Query(default="asc", regex="^(asc|desc)$"),
+    sort_by: str = Query(default="name", pattern="^(name|price|created_at|stock_quantity)$"),
+    sort_order: str = Query(default="asc", pattern="^(asc|desc)$"),
     skip: int = 0,
     limit: int = Query(default=50, le=100),
     db: Session = Depends(get_db)

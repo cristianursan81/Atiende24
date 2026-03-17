@@ -22,7 +22,7 @@ router = APIRouter(prefix="/api/analytics", tags=["Business Analytics"])
 @router.get("/business/{business_id}/dashboard")
 async def get_business_dashboard(
     business_id: int,
-    period: str = Query(default="month", regex="^(day|week|month|quarter|year)$"),
+    period: str = Query(default="month", pattern="^(day|week|month|quarter|year)$"),
     db: Session = Depends(get_db)
 ):
     """Get comprehensive dashboard analytics for a business"""

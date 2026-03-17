@@ -15,7 +15,7 @@ class LeadCreate(BaseModel):
     email: Optional[EmailStr] = None
     phone: Optional[str] = None
     company: Optional[str] = None
-    lead_type: str = Field(default="inquiry", regex="^(inquiry|quote|demo|support)$")
+    lead_type: str = Field(default="inquiry", pattern="^(inquiry|quote|demo|support)$")
     interested_in: Optional[str] = None
     budget_range: Optional[str] = None
     timeline: Optional[str] = None
@@ -27,7 +27,7 @@ class LeadUpdate(BaseModel):
     email: Optional[EmailStr] = None
     phone: Optional[str] = None
     company: Optional[str] = None
-    status: Optional[str] = Field(None, regex="^(new|contacted|qualified|converted|closed)$")
+    status: Optional[str] = Field(None, pattern="^(new|contacted|qualified|converted|closed)$")
     lead_score: Optional[int] = Field(None, ge=0, le=100)
     interested_in: Optional[str] = None
     budget_range: Optional[str] = None
@@ -112,8 +112,8 @@ class BusinessBrandingCreate(BaseModel):
     background_image_url: Optional[str] = None
     font_family: str = "system-ui"
     font_size: str = "14px"
-    widget_position: str = Field(default="bottom-right", regex="^(bottom-right|bottom-left|top-right|top-left)$")
-    widget_shape: str = Field(default="circle", regex="^(circle|square|rounded)$")
+    widget_position: str = Field(default="bottom-right", pattern="^(bottom-right|bottom-left|top-right|top-left)$")
+    widget_shape: str = Field(default="circle", pattern="^(circle|square|rounded)$")
     avatar_url: Optional[str] = None
     business_name: Optional[str] = None
     assistant_name: str = "ChatGenie"
@@ -199,7 +199,7 @@ class AnalyticsSummary(BaseModel):
 # CRM Integration Schemas
 
 class CRMIntegrationCreate(BaseModel):
-    provider: str = Field(..., regex="^(hubspot|salesforce|pipedrive|zapier|webhook)$")
+    provider: str = Field(..., pattern="^(hubspot|salesforce|pipedrive|zapier|webhook)$")
     integration_name: str = Field(..., min_length=1, max_length=100)
     webhook_url: Optional[str] = None
     api_key: Optional[str] = None
@@ -243,23 +243,23 @@ class CRMIntegration(BaseModel):
 
 class BusinessHoursCreate(BaseModel):
     timezone: str = "UTC"
-    monday_open: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    monday_close: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    tuesday_open: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    tuesday_close: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    wednesday_open: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    wednesday_close: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    thursday_open: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    thursday_close: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    friday_open: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    friday_close: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    saturday_open: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    saturday_close: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    sunday_open: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
-    sunday_close: Optional[str] = Field(None, regex="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    monday_open: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    monday_close: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    tuesday_open: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    tuesday_close: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    wednesday_open: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    wednesday_close: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    thursday_open: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    thursday_close: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    friday_open: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    friday_close: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    saturday_open: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    saturday_close: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    sunday_open: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
+    sunday_close: Optional[str] = Field(None, pattern="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")
     closed_message: str = "Estamos cerrados en este momento. Nuestro horario de atención es de lunes a viernes de 9:00 a 18:00."
     holiday_message: Optional[str] = None
-    after_hours_routing: str = Field(default="message", regex="^(message|email|phone|disabled)$")
+    after_hours_routing: str = Field(default="message", pattern="^(message|email|phone|disabled)$")
     phone: Optional[str] = None
     email: Optional[EmailStr] = None
     address: Optional[str] = None
@@ -310,7 +310,7 @@ class ProductCatalogCreate(BaseModel):
     currency: str = "USD"
     stock_quantity: Optional[int] = Field(None, ge=0)
     in_stock: bool = True
-    stock_status: str = Field(default="in_stock", regex="^(in_stock|out_of_stock|back_order)$")
+    stock_status: str = Field(default="in_stock", pattern="^(in_stock|out_of_stock|back_order)$")
     image_url: Optional[str] = None
     gallery_urls: Optional[List[str]] = None
     external_id: Optional[str] = None
@@ -425,7 +425,7 @@ class ProductCatalogUpdate(BaseModel):
     currency: Optional[str] = None
     stock_quantity: Optional[int] = Field(None, ge=0)
     in_stock: Optional[bool] = None
-    stock_status: Optional[str] = Field(None, regex="^(in_stock|out_of_stock|back_order)$")
+    stock_status: Optional[str] = Field(None, pattern="^(in_stock|out_of_stock|back_order)$")
     image_url: Optional[str] = None
     gallery_urls: Optional[List[str]] = None
     external_id: Optional[str] = None
