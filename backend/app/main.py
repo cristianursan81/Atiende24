@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import business, chat, knowledge, settings
+from app.api import business, chat, knowledge, settings, templates, leads, analytics, crm, business_hours, product_catalog, chat_sessions
 from app.db.database import engine
 from app.db import models
 from app.core.config import OPENAI_API_KEY, OPENAI_MODEL
@@ -34,6 +34,13 @@ app.include_router(chat.router)
 app.include_router(knowledge.router)
 app.include_router(settings.router)
 app.include_router(business.router)
+app.include_router(templates.router)
+app.include_router(leads.router)
+app.include_router(analytics.router)
+app.include_router(crm.router)
+app.include_router(business_hours.router)
+app.include_router(product_catalog.router)
+app.include_router(chat_sessions.router)
 
 
 @app.get("/")
