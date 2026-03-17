@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Atiende24 Advanced Widget Demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --dark-bg: #1a1a1a;
+      --dark-card: #2d2d2d;
+      --light-bg: #f8f9fa;
+      --light-card: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, -webkit-system-font, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 60px 0 40px;
+      color: white;
+    }
+    
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .header .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+    
+    .version-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+    }
+    
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .demo-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .demo-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    }
+    
+    .demo-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .feature-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    
+    .feature-list li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .feature-list li::before {
+      content: "✨";
+      font-size: 1.2rem;
+    }
+    
+    .config-section {
+      background: rgba(248, 249, 250, 0.8);
+      padding: 25px;
+      border-radius: 15px;
+      margin: 20px 0;
+      border-left: 4px solid var(--primary-color);
+      backdrop-filter: blur(5px);
+    }
+    
+    .config-section h4 {
+      margin-bottom: 15px;
+      color: #495057;
+      font-size: 1.2rem;
+    }
+    
+    .config-item {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .config-label {
+      font-weight: 600;
+      color: #495057;
+      min-width: 120px;
+    }
+    
+    code {
+      background: rgba(0,123,255,0.1);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+    }
+    
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .shortcut-item {
+      background: rgba(255,255,255,0.7);
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid rgba(0,123,255,0.2);
+    }
+    
+    .shortcut-key {
+      background: #333;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      min-width: 120px;
+      text-align: center;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .btn {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    }
+    
+    .btn-secondary:hover {
+      box-shadow: 0 10px 20px rgba(108,117,125,0.3);
+    }
+    
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      background: rgba(40, 167, 69, 0.1);
+      border: 1px solid rgba(40, 167, 69, 0.3);
+      border-radius: 10px;
+      color: #155724;
+      margin: 20px 0;
+    }
+    
+    .pulse {
+      width: 12px;
+      height: 12px;
+      background: #28a745;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(40, 167, 69, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 40px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+    }
+    
+    .footer a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .footer a:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .shortcuts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🚀 Atiende24 Advanced Widget</h1>
+    <div class="subtitle">Chat inteligente con IA • Funciones avanzadas • Diseño moderno</div>
+    <span class="version-badge">v2.0 - Next Generation</span>
+  </div>
+  
+  <div class="status-indicator">
+    <div class="pulse"></div>
+    <strong>Estado del sistema:</strong> Backend conectado y funcionando correctamente
+  </div>
+
+  <div class="action-buttons">
+    <button class="btn" onclick="toggleChat()">
+      💬 Abrir Chat Demo
+    </button>
+    <button class="btn btn-secondary" onclick="clearHistory()">
+      🗑️ Limpiar Historial
+    </button>
+    <button class="btn btn-secondary" onclick="downloadChat()">
+      📄 Descargar Conversación
+    </button>
+  </div>
+
+  <div class="demo-grid">
+    <div class="demo-card">
+      <h3>🎨 Características Visuales</h3>
+      <ul class="feature-list">
+        <li>Modo oscuro/claro automático</li>
+        <li>Animaciones fluidas y modernas</li>
+        <li>Botón flotante con efectos hover</li>
+        <li>Burbujas de chat diferenciadas</li>
+        <li>Indicadores de escritura animados</li>
+        <li>Mensajes con timestamps</li>
+        <li>Interfaz arrastreable</li>
+        <li>Minimización inteligente</li>
+      </ul>
+    </div>
+
+    <div class="demo-card">
+      <h3>🧠 Funcionalidades IA</h3>
+      <ul class="feature-list">
+        <li>Procesamiento de lenguaje natural</li>
+        <li>Respuestas contextuales</li>
+        <li>Reconocimiento de voz</li>
+        <li>Síntesis de voz</li>
+        <li>Botones de respuesta rápida</li>
+        <li>Reacciones a mensajes</li>
+        <li>Historial persistente</li>
+        <li>Conversaciones inteligentes</li>
+      </ul>
+    </div>
+
+    <div class="demo-card">
+      <h3>⚡ Funciones Avanzadas</h3>
+      <ul class="feature-list">
+        <li>Arrastrar y soltar chat</li>
+        <li>Atajos de teclado</li>
+        <li>Subida de archivos*</li>
+        <li>Emojis integrados*</li>
+        <li>Múltiples conversaciones</li>
+        <li>Modo sin conexión</li>
+        <li>Notificaciones inteligentes</li>
+        <li>Accesibilidad completa</li>
+      </ul>
+      <small style="opacity: 0.7;">* Funciones preparadas para futura implementación</small>
+    </div>
+
+    <div class="demo-card">
+      <h3>⌨️ Atajos de Teclado</h3>
+      <div class="shortcuts-grid">
+        <div class="shortcut-item">
+          <div class="shortcut-key">Ctrl+Shift+C</div>
+          <div>Abrir/cerrar chat</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-key">Escape</div>
+          <div>Cerrar chat</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-key">Enter</div>
+          <div>Enviar mensaje</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-key">Shift+Enter</div>
+          <div>Nueva línea</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h3>⚙️ Configuración Actual</h3>
+      <div class="config-section">
+        <h4>Parámetros de Conexión</h4>
+        <div class="config-item">
+          <span class="config-label">Business ID:</span>
+          <code>1</code>
+        </div>
+        <div class="config-item">
+          <span class="config-label">API Key:</span>
+          <code>PEGA_AQUI_TU_API_KEY</code>
+        </div>
+        <div class="config-item">
+          <span class="config-label">API Base URL:</span>
+          <code>http://localhost:8000</code>
+        </div>
+        <div class="config-item">
+          <span class="config-label">Modelo IA:</span>
+          <code>GPT-4o-mini</code>
+        </div>
+      </div>
+      
+      <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin-top: 15px;">
+        <strong>⚠️ Nota de Producción:</strong><br>
+        Para usar en producción, actualiza la API key y la URL base en la configuración.
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h3>🛠️ Integración</h3>
+      <div class="config-section">
+        <h4>Código de Integración</h4>
+        <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9rem;"><code>&lt;script&gt;
+  window.Atiende24Config = {
+    businessId: TU_BUSINESS_ID,
+    apiKey: "TU_API_KEY_AQUI",
+    apiBaseUrl: "https://tu-servidor.com"
+  };
+&lt;/script&gt;
+&lt;script src="chat-widget.js"&gt;&lt;/script&gt;</code></pre>
+      </div>
+      
+      <div style="background: rgba(23, 162, 184, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8; margin-top: 15px;">
+        <strong>💡 Personalización:</strong><br>
+        El widget se adapta automáticamente al tema del sitio web y recuerda las preferencias del usuario.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Desarrollado con ❤️ por <a href="#" onclick="sendTestMessage()">Atiende24</a></p>
+    <p>Tu asistente virtual inteligente disponible 24/7</p>
+  </div>
+</div>
+
+<script>
+  // Configuración avanzada del widget
+  window.Atiende24Config = {
+    businessId: 1,
+    apiKey: "c0a6a44d453916f597a03a1242312895ea4989c3bef10d87",  // API Key válida para demo
+    apiBaseUrl: "http://localhost:8000",
+    
+    // Configuraciones opcionales (para futura implementación)
+    theme: "auto", // "light", "dark", "auto"
+    language: "es",
+    voiceEnabled: true,
+    fileUploadEnabled: false, // Para futura implementación
+    maxFileSize: 10485760, // 10MB
+    allowedFileTypes: [".pdf", ".doc", ".docx", ".jpg", ".png"],
+    customCSS: "", // CSS personalizado
+    customGreeting: null, // Mensaje personalizado de bienvenida
+    position: "bottom-right", // Posición del botón
+    zIndex: 1000
+  };
+  
+  // Funciones de demostración
+  function toggleChat() {
+    // El widget se carga automáticamente, esta función simula hacer clic en el botón
+    const event = new Event('click');
+    setTimeout(() => {
+      const button = document.querySelector('button[title="Abrir chat de soporte"]');
+      if (button) {
+        button.click();
+      } else {
+        alert('El widget se está cargando... ¡Inténtalo en unos segundos!');
+      }
+    }, 100);
+  }
+  
+  function clearHistory() {
+    localStorage.removeItem('atiende24-history');
+    localStorage.removeItem('atiende24-dark-mode');
+    alert('✅ Historial de conversaciones limpiado correctamente.');
+    location.reload();
+  }
+  
+  function downloadChat() {
+    const history = JSON.parse(localStorage.getItem('atiende24-history') || '[]');
+    if (history.length === 0) {
+      alert('📭 No hay conversaciones para descargar. ¡Inicia un chat primero!');
+      return;
+    }
+    
+    let content = 'CONVERSACIÓN ATIENDE24\\n';
+    content += '========================\\n\\n';
+    
+    history.forEach(msg => {
+      const time = new Date(msg.timestamp).toLocaleString('es-ES');
+      const role = msg.role === 'user' ? 'USUARIO' : 'ASISTENTE';
+      content += `[${time}] ${role}: ${msg.text}\\n\\n`;
+    });
+    
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `atiende24-chat-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+  
+  function sendTestMessage() {
+    toggleChat();
+    setTimeout(() => {
+      const input = document.querySelector('textarea[placeholder="Escribe tu mensaje..."]');
+      if (input) {
+        input.value = '¡Hola! Este es un mensaje de prueba desde la demo 🚀';
+        const event = new Event('input');
+        input.dispatchEvent(event);
+        
+        // Simular envío
+        setTimeout(() => {
+          const sendBtn = input.parentElement.parentElement.querySelector('button[title=""]');
+          if (sendBtn) sendBtn.click();
+        }, 500);
+      }
+    }, 1500);
+  }
+  
+  // Mostrar información del sistema
+  console.log('🎯 Atiende24 Demo Page loaded!');
+  console.log('📊 Features enabled:', {
+    darkMode: true,
+    voiceRecognition: 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window,
+    speechSynthesis: 'speechSynthesis' in window,
+    localStorage: 'localStorage' in window,
+    notifications: 'Notification' in window
+  });
+  
+  // Detectar características del navegador
+  window.addEventListener('load', () => {
+    const features = [];
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) features.push('🎤 Reconocimiento de voz');
+    if ('speechSynthesis' in window) features.push('🔊 Síntesis de voz');
+    if ('localStorage' in window) features.push('💾 Almacenamiento local');
+    if ('Notification' in window) features.push('🔔 Notificaciones');
+    
+    if (features.length > 0) {
+      console.log('✅ Características soportadas:', features.join(', '));
+    }
+  });
+</script>
+
+<!-- Widget de chat advanced -->
+<script src="chat-widget.js"></script>
+
+</body>
+</html>
