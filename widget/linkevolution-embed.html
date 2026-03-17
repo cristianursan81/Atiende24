@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGenie - Embeddable Widget for LinkEvolution</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .hero {
+            margin-bottom: 60px;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .integration-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+        }
+        .code-block {
+            background: #2d3748;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            overflow-x: auto;
+            border: 1px solid #4a5568;
+        }
+        .code-block pre {
+            margin: 0;
+            color: #e2e8f0;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .feature-card h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        .api-endpoint {
+            background: rgba(0, 123, 255, 0.1);
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .api-endpoint code {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        .demo-preview {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 300px;
+        }
+        .copy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>🧞‍♂️ ChatGenie para LinkEvolution</h1>
+            <p>Transforma la experiencia de tus clientes con IA conversacional especializada en Transformación Digital</p>
+        </div>
+
+        <div class="integration-section">
+            <h2>🚀 Integración Rápida (1 minuto)</h2>
+            <p>Simplemente agrega este código antes del cierre del <code>&lt;/body&gt;</code> en tu website:</p>
+            
+            <div class="code-block">
+                <pre><code>&lt;!-- ChatGenie para LinkEvolution --&gt;
+&lt;script&gt;
+window.ChatGenieConfig = {
+  businessId: 1,
+  apiKey: "linkevolution-demo-key",
+  apiBaseUrl: "http://localhost:8000",
+  
+  // Configuración específica para LinkEvolution  
+  branding: {
+    businessName: "LinkEvolution",
+    primaryColor: "#667eea",
+    secondaryColor: "#764ba2", 
+    accentColor: "#FFD700",
+    logo: "https://www.linkevolution.eu/assets/logo-48819uKy.png"
+  },
+  
+  // Personalización para servicios de transformación digital
+  template: "services",
+  language: "es-ES",
+  
+  // Quick actions específicas para LinkEvolution
+  quickActions: [
+    {
+      text: "🚀 Consulta Gratuita",
+      action: "schedule_consultation", 
+      message: "Me interesa agendar una consulta gratuita"
+    },
+    {
+      text: "🤖 Automatización",
+      action: "automation_info",
+      message: "¿Cómo pueden ayudarme con automatización de procesos?"
+    },
+    {
+      text: "📊 Transformación Digital", 
+      action: "digital_transformation",
+      message: "Necesito información sobre transformación digital"
+    },
+    {
+      text: "💼 Casos de Éxito",
+      action: "case_studies", 
+      message: "Quiero ver ejemplos de proyectos exitosos"
+    },
+    {
+      text: "📞 Contactar Equipo",
+      action: "contact_team",
+      message: "Quiero hablar con vuestro equipo especializado"
+    },
+    {
+      text: "💰 Presupuesto",
+      action: "get_quote",
+      message: "Me gustaría solicitar un presupuesto personalizado"
+    }
+  ],
+
+  // Mensaje de bienvenida personalizado
+  greeting: "¡Hola! 👋 Soy el asistente IA de LinkEvolution. Estoy aquí para ayudarte con información sobre nuestros servicios de transformación digital, automatización y gestión de flujos. ¿En qué puedo ayudarte hoy? ✨",
+  
+  // Configuración del widget
+  position: "bottom-right",
+  theme: "auto", // auto, light, dark
+  enableVoice: true,
+  enableDragging: true,
+  showQuickActions: true,
+  
+  // Lead capture settings
+  leadCapture: {
+    enabled: true,
+    triggers: ["consultation", "quote", "contact"],
+    fields: ["name", "email", "company", "phone"],
+    autoCapture: true
+  },
+  
+  // Business hours (Madrid timezone)
+  businessHours: {
+    timezone: "Europe/Madrid", 
+    monday: { open: "09:00", close: "18:00" },
+    tuesday: { open: "09:00", close: "18:00" },
+    wednesday: { open: "09:00", close: "18:00" },
+    thursday: { open: "09:00", close: "18:00" },
+    friday: { open: "09:00", close: "18:00" },
+    afterHoursMessage: "Estamos cerrados ahora, pero puedes dejar tu consulta y te responderemos pronto. También puedes contactarnos por WhatsApp: +34 647 027 418"
+  }
+};
+&lt;/script&gt;
+&lt;script src="http://localhost:8000/widget/linkevolution-embed.js" async&gt;&lt;/script&gt;</code></pre>
+            </div>
+            
+            <button class="copy-btn" onclick="copyEmbedCode()">📋 Copiar Código</button>
+        </div>
+
+        <div class="integration-section">
+            <h2>🎯 Configuración Especializada para LinkEvolution</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🚀 Servicios Principales</h3>
+                    <ul>
+                        <li>Transformación Digital</li>
+                        <li>Automatización de Procesos</li>
+                        <li>Gestión de Flujos de Trabajo</li>
+                        <li>Consultoría Especializada</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📊 Lead Generation</h3>
+                    <ul>
+                        <li>Captura automática de consultas</li>
+                        <li>Scoring inteligente de prospectos</li>
+                        <li>Integración con CRM</li>
+                        <li>Seguimiento de conversiones</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🎨 Branding Personalizado</h3>
+                    <ul>
+                        <li>Colores de LinkEvolution</li>
+                        <li>Logo integrado</li>
+                        <li>Mensajes personalizados</li>
+                        <li>Tema responsive</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🌍 Localización Española</h3>
+                    <ul>
+                        <li>Interfaz en español</li>
+                        <li>Horarios Madrid (Europe/Madrid)</li>
+                        <li>WhatsApp integration</li>
+                        <li>Conversación natural en español</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="integration-section">
+            <h2>🔧 APIs Disponibles</h2>
+            <p>ChatGenie incluye APIs completas para gestión avanzada:</p>
+            
+            <div class="api-endpoint">
+                <strong>📊 Analytics:</strong> <code>GET /api/analytics/business/1/dashboard</code><br>
+                <small>Métricas de rendimiento, conversiones y insights</small>
+            </div>
+            
+            <div class="api-endpoint">
+                <strong>👥 Leads:</strong> <code>GET /api/leads/?business_id=1</code><br>
+                <small>Gestión completa de leads generados por el chat</small>
+            </div>
+            
+            <div class="api-endpoint">
+                <strong>💬 Sessions:</strong> <code>GET /api/sessions/business/1</code><br>
+                <small>Historial y analytics de conversaciones</small>
+            </div>
+            
+            <div class="api-endpoint">
+                <strong>🔗 CRM:</strong> <code>POST /api/crm/</code><br>
+                <small>Integración con HubSpot, Salesforce, Pipedrive</small>
+            </div>
+            
+            <div class="api-endpoint">
+                <strong>⏰ Horarios:</strong> <code>GET /api/business-hours/business/1</code><br>
+                <small>Gestión de disponibilidad y horarios</small>
+            </div>
+        </div>
+
+        <div class="integration-section">
+            <h2>📈 Aprovecha el Potencial Completo</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🎯 Generación de Leads Automática</h3>
+                    <p>Convierte visitantes en prospectos calificados automáticamente. ChatGenie identifica intención de compra y captura información de contacto de forma natural.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📱 Experiencia Omnicanal</h3>
+                    <p>Integración perfecta con tu website. Los usuarios pueden continuar conversaciones vía email o WhatsApp sin perder contexto.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🤖 IA Especializada en B2B</h3>
+                    <p>Entrenada específicamente para servicios de transformación digital. Entiende terminología técnica y casos de uso empresariales.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📊 Analytics Avanzados</h3>
+                    <p>Dashboard completo con métricas de conversión, fuentes de tráfico, preguntas frecuentes y optimizaciones recomendadas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-preview">
+        <h4>🧞‍♂️ Demo Live</h4>
+        <p>¡El widget ya está funcionando en esta página!</p>
+        <p>Prúebalo haciendo clic en el botón de chat. 👉</p>
+    </div>
+
+    <!-- ChatGenie Live Demo -->
+    <script>
+    window.ChatGenieConfig = {
+        businessId: 1,
+        apiKey: "linkevolution-demo-key", 
+        apiBaseUrl: "http://localhost:8000",
+        
+        branding: {
+            businessName: "LinkEvolution",
+            primaryColor: "#667eea",
+            secondaryColor: "#764ba2",
+            accentColor: "#FFD700",
+            logo: "https://www.linkevolution.eu/assets/logo-48819uKy.png"
+        },
+        
+        template: "services",
+        language: "es-ES",
+        
+        quickActions: [
+            { text: "🚀 Consulta Gratuita", action: "schedule_consultation", message: "Me interesa agendar una consulta gratuita" },
+            { text: "🤖 Automatización", action: "automation_info", message: "¿Cómo pueden ayudarme con automatización de procesos?" },
+            { text: "📊 Transformación Digital", action: "digital_transformation", message: "Necesito información sobre transformación digital" },
+            { text: "💼 Casos de Éxito", action: "case_studies", message: "Quiero ver ejemplos de proyectos exitosos" },
+            { text: "📞 Contactar Equipo", action: "contact_team", message: "Quiero hablar con vuestro equipo especializado" },
+            { text: "💰 Presupuesto", action: "get_quote", message: "Me gustaría solicitar un presupuesto personalizado" }
+        ],
+
+        greeting: "¡Hola! 👋 Soy el asistente IA de LinkEvolution. Estoy aquí para ayudarte con información sobre nuestros servicios de transformación digital, automatización y gestión de flujos. ¿En qué puedo ayudarte hoy? ✨",
+        
+        position: "bottom-right",
+        theme: "auto",
+        enableVoice: true,
+        enableDragging: true,
+        showQuickActions: true,
+        
+        leadCapture: {
+            enabled: true,
+            triggers: ["consultation", "quote", "contact"],
+            fields: ["name", "email", "company", "phone"],
+            autoCapture: true
+        },
+        
+        businessHours: {
+            timezone: "Europe/Madrid",
+            monday: { open: "09:00", close: "18:00" },
+            tuesday: { open: "09:00", close: "18:00" },
+            wednesday: { open: "09:00", close: "18:00" },
+            thursday: { open: "09:00", close: "18:00" },
+            friday: { open: "09:00", close: "18:00" },
+            afterHoursMessage: "Estamos cerrados ahora, pero puedes dejar tu consulta y te responderemos pronto. También puedes contactarnos por WhatsApp: +34 647 027 418"
+        }
+    };
+    </script>
+    <script src="../widget/chat-widget.js" async></script>
+
+    <script>
+    function copyEmbedCode() {
+        const codeBlock = document.querySelector('.code-block pre code');
+        const textArea = document.createElement('textarea');
+        textArea.value = codeBlock.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        const button = document.querySelector('.copy-btn');
+        const originalText = button.textContent;
+        button.textContent = '✅ Copiado!';
+        button.style.background = '#28a745';
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '#007bff';
+        }, 2000);
+    }
+    </script>
+</body>
+</html>
