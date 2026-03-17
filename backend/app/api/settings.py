@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.db.database import SessionLocal
-from app.db.models import Business, BusinessSettings
+from app.core.security import get_api_key, validate_api_key_for_business
+from app.db.database import get_db
+from app.db.models import BusinessSettings
 from app.schemas.settings import BusinessSettingsCreate
 
 router = APIRouter(
@@ -11,19 +12,13 @@ router = APIRouter(
 )
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 @router.post("/")
-def create_or_update_settings(data: BusinessSettingsCreate, db: Session = Depends(get_db)):
-    business = db.query(Business).filter(Business.id == data.business_id).first()
-    if business is None:
-        raise HTTPException(status_code=404, detail="El negocio no existe.")
+def create_or_update_settings(
+    data: BusinessSettingsCreate,
+    db: Session = Depends(get_db),
+    x_api_key: str | None = Depends(get_api_key)
+):
+    validate_api_key_for_business(data.business_id, x_api_key, db)
 
     settings = (
         db.query(BusinessSettings)
@@ -62,7 +57,13 @@ def create_or_update_settings(data: BusinessSettingsCreate, db: Session = Depend
 
 
 @router.get("/{business_id}")
-def get_settings(business_id: int, db: Session = Depends(get_db)):
+def get_settings(
+    business_id: int,
+    db: Session = Depends(get_db),
+    x_api_key: str | None = Depends(get_api_key)
+):
+    validate_api_key_for_business(business_id, x_api_key, db)
+
     settings = (
         db.query(BusinessSettings)
         .filter(BusinessSettings.business_id == business_id)

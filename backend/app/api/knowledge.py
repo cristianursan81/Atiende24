@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from app.db.database import SessionLocal
-from app.db.models import Business, KnowledgeItem
+from app.core.security import get_api_key, validate_api_key_for_business
+from app.db.database import get_db
+from app.db.models import KnowledgeItem
 from app.schemas.knowledge import KnowledgeCreate
 
 router = APIRouter(
@@ -11,24 +12,18 @@ router = APIRouter(
 )
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 @router.post("/")
-def create_knowledge_item(data: KnowledgeCreate, db: Session = Depends(get_db)):
+def create_knowledge_item(
+    data: KnowledgeCreate,
+    db: Session = Depends(get_db),
+    x_api_key: str | None = Depends(get_api_key)
+):
     if not data.title.strip():
         raise HTTPException(status_code=400, detail="El título no puede estar vacío.")
     if not data.content.strip():
         raise HTTPException(status_code=400, detail="El contenido no puede estar vacío.")
 
-    business = db.query(Business).filter(Business.id == data.business_id).first()
-    if business is None:
-        raise HTTPException(status_code=404, detail="El negocio no existe.")
+    validate_api_key_for_business(data.business_id, x_api_key, db)
 
     item = KnowledgeItem(
         business_id=data.business_id,
@@ -50,11 +45,10 @@ def create_knowledge_item(data: KnowledgeCreate, db: Session = Depends(get_db)):
 @router.get("/")
 def list_knowledge_items(
     business_id: int = Query(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    x_api_key: str | None = Depends(get_api_key)
 ):
-    business = db.query(Business).filter(Business.id == business_id).first()
-    if business is None:
-        raise HTTPException(status_code=404, detail="El negocio no existe.")
+    validate_api_key_for_business(business_id, x_api_key, db)
 
     items = (
         db.query(KnowledgeItem)

@@ -11,6 +11,7 @@ class Business(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
+    api_key = Column(String, unique=True, nullable=False, index=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     knowledge_items = relationship("KnowledgeItem", back_populates="business", cascade="all, delete-orphan")
