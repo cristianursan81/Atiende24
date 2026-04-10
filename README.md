@@ -109,6 +109,35 @@ Objetivo: consolidar el flujo de copiloto interno con trazabilidad mínima.
 
 ---
 
+
+## Nuevo endpoint V1 (copilot)
+
+`POST /copilot/analyze`
+
+Input:
+
+```json
+{
+  "title": "Opcional",
+  "body": "Obligatorio"
+}
+```
+
+Output:
+
+```json
+{
+  "category": "general",
+  "confidence_score": 0.67,
+  "decision": "RESOLVE",
+  "suggested_reply": "...",
+  "escalation_reason": null,
+  "sources": [{"id": 1, "title": "..."}]
+}
+```
+
+---
+
 ## Ejecución local
 
 ### 1) Variables de entorno
