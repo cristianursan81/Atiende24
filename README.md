@@ -1,39 +1,77 @@
 # Atiende24
-AI Support Copilot for Support Teams
 
-Atiende24 V1 se redefine como un AI Support Copilot interno para equipos de soporte. Ayuda a agentes a redactar respuestas de forma consistente usando una base de conocimiento aprobada y reglas de escalado a humano.
+AI Support Copilot for Internal Support Teams
 
-Ejemplos de uso:
+Atiende24 V1 is an internal AI Support Copilot designed to help support agents respond faster and more consistently using an approved knowledge base and simple escalation rules.
 
-- clínicas dentales
-- peluquerías
-- restaurantes
-- academias
-- centros médicos
-- gimnasios
-
-El sistema funciona como **copiloto para agentes** (no como bot autónomo hacia cliente final).
+It is **not** a public-facing chatbot.  
+It is a tool for internal support operations.
 
 ---
 
-# Arquitectura del sistema
+## What Atiende24 V1 does
 
-Atiende24 está construido con una arquitectura modular basada en API.
+Atiende24 helps support teams:
 
-Cliente (Swagger / Web Widget)
+- analyze incoming tickets
+- retrieve relevant knowledge base content
+- draft grounded reply suggestions
+- classify the case
+- decide whether the case should be escalated to a human
+
+The goal is to reduce response time, improve consistency, and lower agent cognitive load.
+
+---
+
+## Core use case
+
+An agent pastes a support ticket into the system.
+
+Atiende24 then:
+
+1. retrieves relevant internal knowledge
+2. classifies the case
+3. estimates confidence
+4. returns one of two outcomes:
+   - **suggested reply**
+   - **escalate to human**, with reason
+
+---
+
+## What V1 is not
+
+Atiende24 V1 does **not** include:
+
+- public chatbot
+- WhatsApp
+- email delivery
+- voice
+- CRM integrations
+- multi-tenant support
+- admin panel
+- advanced analytics
+- autonomous customer replies
+- transactional actions on customer accounts
+
+---
+
+## Architecture
+
+Atiende24 uses a lightweight API-based architecture.
+
+Support Agent UI / Internal Demo UI
         │
         ▼
 FastAPI Backend
         │
-        ├── Chat API
-        ├── Knowledge API
+        ├── Analyze Ticket Endpoint
+        ├── Knowledge Base Access
         │
         ▼
 SQLite Database
         │
-        ├── Conversations
-        ├── Messages
-        ├── KnowledgeItems
+        ├── Knowledge metadata
+        ├── Logs
         │
         ▼
 RAG Engine
@@ -46,31 +84,26 @@ OpenAI LLM
 
 ---
 
-# Stack tecnológico
+## Tech stack
 
-Backend
-
+### Backend
 - Python
 - FastAPI
 - SQLAlchemy
 - SQLite
 - OpenAI API
-- numpy
 - python-dotenv
 
-IA
+### AI
+- Chat model: `gpt-4o-mini`
+- Embedding model: `text-embedding-3-small`
 
-Modelo de chat
-
-gpt-4o-mini
-
-Modelo de embeddings
-
-text-embedding-3-small
+### Optional UI
+- Streamlit for internal demo
 
 ---
 
-# Estructura del proyecto
+## Current project structure
 
 Atiende24
 │
@@ -104,115 +137,16 @@ Atiende24
 
 ---
 
-# Variables de entorno
+## Environment variables
 
-Archivo
+File:
 
-backend/.env
+`backend/.env`
 
-Contenido
+Content:
 
-OPENAI_API_KEY=tu_api_key
+```env
+OPENAI_API_KEY=your_api_key
 OPENAI_MODEL=gpt-4o-mini
-
----
-
-# Instalación
-
-1 instalar dependencias
-
-pip install -r requirements.txt
-
-2 arrancar servidor
-
-python run.py
-
-Servidor disponible en
-
-http://localhost:8000
-
-Documentación automática
-
-http://localhost:8000/docs
-
----
-
-# API endpoints
-
-Chat
-
-POST /chat/message
-
-Input
-
-{
-  "conversation_id": 1,
-  "message": "¿Cuál es vuestro horario?"
-}
-
-Respuesta
-
-{
-  "conversation_id": 1,
-  "reply": "Abrimos de lunes a viernes de 9 a 19."
-}
-
----
-
-Knowledge base
-
-Crear conocimiento
-
-POST /knowledge/
-
-{
-  "title": "Horario",
-  "content": "Abrimos de lunes a viernes de 9:00 a 19:00."
-}
-
-Listar conocimiento
-
-GET /knowledge/
-
----
-
-# Sistema RAG
-
-El sistema utiliza Retrieval Augmented Generation.
-
-Proceso:
-
-1 usuario pregunta
-2 se genera embedding
-3 se compara con embeddings almacenados
-4 se calcula similitud coseno
-5 se recupera conocimiento relevante
-6 se construye prompt
-7 el modelo genera respuesta
-
----
-
-# Estado actual del proyecto
-
-Backend funcional
-RAG semántico activo
-Base de conocimiento
-Historial de conversaciones
-Embeddings
-Chat AI operativo
-
----
-
-# Próximos pasos
-
-1 Web chat widget
-2 multi-tenant architecture
-3 panel admin
-4 integración WhatsApp
-5 base vectorial pgvector
-
----
-
-# Licencia
-
-Proyecto experimental en desarrollo.
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+```
