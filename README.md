@@ -1,7 +1,7 @@
 # Atiende24
-AI Receptionist Platform for Local Businesses
+AI Support Copilot for Support Teams
 
-Atiende24 es una plataforma SaaS que permite a negocios locales automatizar su atención al cliente mediante agentes de inteligencia artificial capaces de responder preguntas, gestionar conversaciones y utilizar el conocimiento del negocio.
+Atiende24 V1 se redefine como un AI Support Copilot interno para equipos de soporte. Ayuda a agentes a redactar respuestas de forma consistente usando una base de conocimiento aprobada y reglas de escalado a humano.
 
 Ejemplos de uso:
 
@@ -12,7 +12,7 @@ Ejemplos de uso:
 - centros médicos
 - gimnasios
 
-El sistema funciona como una **recepcionista virtual 24/7**.
+El sistema funciona como **copiloto para agentes** (no como bot autónomo hacia cliente final).
 
 ---
 
