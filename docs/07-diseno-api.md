@@ -1,13 +1,18 @@
 # Documento 07 — Diseño API
 
-Endpoints principales.
+Endpoints implementados actualmente (MVP).
 
-POST /auth/register  
-POST /auth/login  
+GET /
+POST /chat/message
+POST /knowledge/
+GET /knowledge/
 
-POST /chat/message  
+---
 
-GET /leads  
-POST /leads  
+Endpoints previstos (roadmap, no implementados todavía).
 
+POST /auth/register
+POST /auth/login
+GET /leads
+POST /leads
 GET /conversations

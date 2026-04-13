@@ -41,8 +41,8 @@ SQLite Database
         ▼
 RAG Engine
         │
-        ├── Embeddings
-        ├── Similarity Search
+        ├── Normalización/tokenización
+        ├── Scoring léxico por tokens
         │
         ▼
 OpenAI LLM
@@ -58,7 +58,6 @@ Backend
 - SQLAlchemy
 - SQLite
 - OpenAI API
-- numpy
 - python-dotenv
 
 IA
@@ -67,9 +66,9 @@ Modelo de chat
 
 gpt-4o-mini
 
-Modelo de embeddings
+Modelo de recuperación de conocimiento
 
-text-embedding-3-small
+Búsqueda léxica por tokens (sin embeddings en el MVP actual)
 
 ---
 
@@ -97,8 +96,7 @@ Atiende24
 │   │   │
 │   │   └── services
 │   │       ├── ai_service.py
-│   │       ├── embedding_service.py
-│   │       └── semantic_rag_service.py
+│   │       └── rag_service.py
 │   │
 │   ├── .env
 │   ├── atiende24.db
