@@ -1,12 +1,18 @@
+import logging
+
 from fastapi import FastAPI
 
 from app.api import chat, knowledge, copilot
-from app.db.database import engine
-from app.db import models
 from app.core.config import OPENAI_API_KEY, OPENAI_MODEL
+from app.db import models
+from app.db.database import engine
 
-print("MODEL:", OPENAI_MODEL)
-print("API KEY CONFIGURADA:", "sí" if OPENAI_API_KEY else "no")
+logger = logging.getLogger(__name__)
+
+if OPENAI_API_KEY:
+    logger.info("MODEL: %s | API key leída: configurada", OPENAI_MODEL)
+else:
+    logger.warning("MODEL: %s | API key leída: no configurada", OPENAI_MODEL)
 
 models.Base.metadata.create_all(bind=engine)
 

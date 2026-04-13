@@ -41,8 +41,8 @@ SQLite Database
         ▼
 RAG Engine
         │
-        ├── Embeddings
-        ├── Similarity Search
+        ├── Normalización/tokenización
+        ├── Scoring léxico por tokens
         │
         ▼
 OpenAI LLM
@@ -58,7 +58,6 @@ Backend
 - SQLAlchemy
 - SQLite
 - OpenAI API
-- numpy
 - python-dotenv
 
 IA
@@ -67,9 +66,9 @@ Modelo de chat
 
 gpt-4o-mini
 
-Modelo de embeddings
+Modelo de recuperación de conocimiento
 
-text-embedding-3-small
+Búsqueda léxica por tokens (sin embeddings en el MVP actual)
 
 ---
 
@@ -97,8 +96,7 @@ Atiende24
 │   │   │
 │   │   └── services
 │   │       ├── ai_service.py
-│   │       ├── embedding_service.py
-│   │       └── semantic_rag_service.py
+│   │       └── rag_service.py
 │   │
 │   ├── .env
 │   ├── atiende24.db
@@ -222,19 +220,18 @@ El sistema utiliza Retrieval Augmented Generation.
 Proceso:
 
 1 usuario pregunta
-2 se genera embedding
-3 se compara con embeddings almacenados
-4 se calcula similitud coseno
-5 se recupera conocimiento relevante
-6 se construye prompt
-7 el modelo genera respuesta
+2 se normaliza y tokeniza la consulta
+3 se puntúan knowledge items por coincidencia de tokens
+4 se recupera conocimiento relevante (top_k)
+5 se construye prompt
+6 el modelo genera respuesta
 
 ---
 
 # Estado actual del proyecto
 
 Backend funcional
-RAG con base de conocimiento (keyword retrieval)
+RAG léxico activo (keyword retrieval)
 Base de conocimiento demo (10 artículos)
 Historial de conversaciones
 Chat AI operativo
