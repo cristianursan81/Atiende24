@@ -1,7 +1,9 @@
 # Atiende24
-AI Receptionist Platform for Local Businesses
+AI Support Copilot para equipos de soporte
 
 Atiende24 es una plataforma SaaS que permite a negocios locales automatizar su atención al cliente mediante agentes de inteligencia artificial capaces de responder preguntas, gestionar conversaciones y utilizar el conocimiento del negocio.
+
+**Sprint 1 — Copilot MVP**: el sistema ahora incluye un endpoint de análisis de tickets que clasifica automáticamente las consultas, recupera conocimiento relevante y genera una respuesta sugerida o recomienda escalado a un agente humano.
 
 Ejemplos de uso:
 
@@ -12,7 +14,7 @@ Ejemplos de uso:
 - centros médicos
 - gimnasios
 
-El sistema funciona como una **recepcionista virtual 24/7**.
+El sistema funciona como una **recepcionista virtual y copilot de soporte 24/7**.
 
 ---
 
@@ -27,6 +29,7 @@ FastAPI Backend
         │
         ├── Chat API
         ├── Knowledge API
+        ├── Copilot API  ← nuevo en Sprint 1
         │
         ▼
 SQLite Database
@@ -174,6 +177,42 @@ GET /knowledge/
 
 ---
 
+Copilot — análisis de tickets de soporte
+
+POST /copilot/analyze
+
+Input (body obligatorio, title opcional)
+
+```json
+{
+  "title": "Quiero devolver un producto",
+  "body": "Compré un artículo hace una semana y quiero devolverlo. ¿Cuál es el proceso?"
+}
+```
+
+Respuesta
+
+```json
+{
+  "category": "PROCESS",
+  "confidence_score": 0.72,
+  "decision": "auto_reply",
+  "suggested_reply": "Hola, gracias por contactarnos.\n\nSegún la información disponible:\n\n• Proceso de cambio de producto: ...",
+  "escalation_reason": null,
+  "reasoning_summary": "Categoría detectada: PROCESS. Confianza: 0.72. Fuentes consultadas: Proceso de cambio de producto, Política de devoluciones.",
+  "sources": [
+    {"title": "Proceso de cambio de producto", "content": "..."},
+    {"title": "Política de devoluciones", "content": "..."}
+  ]
+}
+```
+
+Categorías posibles: `FAQ` | `PROCESS` | `ESCALATE`
+
+Decisiones posibles: `auto_reply` | `escalate`
+
+---
+
 # Sistema RAG
 
 El sistema utiliza Retrieval Augmented Generation.
@@ -192,10 +231,11 @@ Proceso:
 # Estado actual del proyecto
 
 Backend funcional
-RAG léxico activo
-Base de conocimiento
+RAG léxico activo (keyword retrieval)
+Base de conocimiento demo (10 artículos)
 Historial de conversaciones
 Chat AI operativo
+✅ **Copilot MVP** — `POST /copilot/analyze` operativo
 
 ---
 

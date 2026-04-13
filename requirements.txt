@@ -1,0 +1,8 @@
+streamlit
+openai
+chromadb
+pydantic
+python-dotenv
+pypdf
+pytest
+tqdm

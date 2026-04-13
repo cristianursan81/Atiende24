@@ -5,7 +5,7 @@ from app.core.config import OPENAI_API_KEY, OPENAI_MODEL
 _client: OpenAI | None = None
 
 
-def get_openai_client() -> OpenAI:
+def _get_client() -> OpenAI:
     global _client
     if _client is None:
         if not OPENAI_API_KEY:
@@ -15,8 +15,7 @@ def get_openai_client() -> OpenAI:
 
 
 def generate_chat_reply(messages: list[dict]) -> str:
-    client = get_openai_client()
-    response = client.chat.completions.create(
+    response = _get_client().chat.completions.create(
         model=OPENAI_MODEL,
         messages=messages,
         temperature=0.2
