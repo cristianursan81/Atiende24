@@ -18,3 +18,10 @@ node_modules/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Secrets & keys
+*.key
+*.pem
+secrets*
+.env.*
+.env.local
